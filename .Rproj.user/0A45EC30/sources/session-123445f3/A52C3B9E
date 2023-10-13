@@ -1,0 +1,26 @@
+{
+    "id": "A52C3B9E",
+    "path": "~/SPMA/man/generate_data.Rd",
+    "project_path": "man/generate_data.Rd",
+    "type": "r_doc",
+    "hash": "4288517606",
+    "contents": "",
+    "dirty": false,
+    "created": 1697140256583.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "17,63",
+        "scrollLine": "1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697174180,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697174180561,
+    "read_only": false,
+    "read_only_alternatives": []
+}

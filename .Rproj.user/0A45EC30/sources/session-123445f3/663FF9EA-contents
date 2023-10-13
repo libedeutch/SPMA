@@ -1,0 +1,20 @@
+\name{generate_data}
+\alias{generate_data}
+\title{generate_data}
+\description{
+Generate simulation survival data for meta-analysis. 
+}
+\usage{
+generate_data(N ,p , correlate , rightCensor ,intervalCensor, M =3, q ,seed)}
+\argument{
+\item{M}{the number of studies or groups in the simulated data}
+\item{N}{
+the number of subjects (patients) in each group. 
+}
+\item{p}{the number of covariates for the simulation data}
+\item{correlate}{the covariance matrix of generated covariates \tetxbf{X}}
+\item{rightCensor}{logical. If TRUE, the event time is generated right-censoring scheme.}
+\item{IntervalCensor}{logical. If TRUE, the event time is generated from  interval-censoring scheme.}
+\item{q}{the proportion of true coefficients to be non-zero }
+\item{seed}{a random seed}
+}

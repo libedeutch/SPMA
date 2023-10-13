@@ -1,0 +1,26 @@
+{
+    "id": "6DF03CD1",
+    "path": "~/SPMA/man/printResult.Rd",
+    "project_path": "man/printResult.Rd",
+    "type": "r_doc",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1697177839919.0,
+    "source_on_save": false,
+    "relative_order": 12,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "2,19",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697178126,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697178126377,
+    "read_only": false,
+    "read_only_alternatives": []
+}
