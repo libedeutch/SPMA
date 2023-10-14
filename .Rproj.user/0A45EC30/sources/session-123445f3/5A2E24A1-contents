@@ -14,5 +14,5 @@ bayes_bic_spma(thetaF, thetahat, covF1, covF2, covF3, N, p)
 \item{N}{the sample size vector of three studies.}
 \item{p}{the number of covariates.}
 }
-\examples{loading}
+\examples{}
 

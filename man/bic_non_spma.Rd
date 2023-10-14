@@ -23,11 +23,15 @@ For right-censored data and data without censoring, \cr
  \left[ \bm{x}_{i}^{m\top}\bm{\hat{\beta}}^m - \log \left(\sum_{j: T_j\geq T_i} ^{n_m}\exp(\bm{x}_{j}^{m\top}\bm{\hat{\beta}}^m)\right)\right] +  {\color{black}{ \log n/n }} \sum_{m=1}^M \sum_{j=1}^pI(\hat{\beta}_j^m \neq 0 )}
 }
 \examples{
-seed = sample(1,1:10e8)
-simulData = (N=c(500,500,500) ,p =10, correlate = TRUE , rightCensor = FALSE ,intervalCensor = TRUE, M =3, q=0.2 ,seed)
+seed = sample(1:10e8,1)
+simulData = generate_data(N=c(500,500,500), p =10, correlate = TRUE ,
+rightCensor = FALSE ,intervalCensor = FALSE, M =3, q=0.2 ,seed)
 modl = trainSPMA(simulData)
-# take result from group lasso as an example
-thetahat = modl$grlasso$beta[,1]
-bayes_bic_spma(set.n=c(500,500,500),thetahat,simulData$sample1,simulData$sample2,simulData$sample3,p10,M=3,intercalCensor = TRUE)
+# Unpenalized estimator
+thetaF = modl$unpel
+#take first model as example
+thetahat = modl$spma[[1]]$alphaM[,,10]
+bayes_bic_spma(thetaF,thetahat,
+modl$covF1,modl$covF2,modl$covF3,p = 10, N =c(500,500,500) )
 }
 

@@ -16,13 +16,14 @@ printResult(rre, intervalCensor)
 rre = list()
 seed = runif(10,0,10e8)
 for(i in 1:10){
-  cc = generate_data(p=8,intervalCensor = TRUE,seed = seed[i], N = c(1000,1000,1000))
-  dd = trainSPMA(cc,intervalCensor = TRUE,m = 5)
+  cc = generate_data(p=8,intervalCensor = FALSE,rightCensor = TRUE,
+  seed = seed[i], N = c(1000,1000,1000))
+  dd = trainSPMA(cc,m = 5)
   best.idx = bic_model_selection(dd)
-  spma.bic = select.model.spma(dd)
+  spma.bic = select_model_spma(dd)
   rmse0 = rmse(trainSPMA.object=dd, best.idx = best.idx, spma.bic = spma.bic, Data = cc )
   rre[[i]] = rmse0
 }
-printResult(rre, intervalCensor = T)
+printResult(rre, intervalCensor = TRUE)
 }
 

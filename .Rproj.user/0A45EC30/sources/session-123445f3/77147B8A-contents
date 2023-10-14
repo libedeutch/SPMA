@@ -14,10 +14,11 @@ rmse(trainSPMA.object, best.idx, spma.bic, Data)
 \item{Data}{a generate_data object.}
 }
 \examples{
-seed = sample(1,1:10e8)
-simulData = (N=c(500,500,500) ,p =10, correlate = TRUE , rightCensor ,intervalCensor, M =3, q=0.2 ,seed)
+seed = sample(1:10e8,1)
+simulData = generate_data(N=c(500,500,500) ,p =10, correlate = TRUE ,
+rightCensor = TRUE,intervalCensor =FALSE, M =3, q=0.2 ,seed)
 modl = trainSPMA(simulData)
-spma.bic = select_model_spma(modl)$idx.spma
+spma.bic = select_model_spma(modl)
 best.idx = bic_model_selection(modl)
 rmse(modl, best.idx,spma.bic, simulData)
 }

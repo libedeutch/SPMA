@@ -1,11 +1,28 @@
 Package: SPMA
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Meta-analysis 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: person("Jie","Yang",email="gilly.lavita@gmail,com",role = c("aut", "cre"))
+LinkingTo: Rcpp,
+           RcppArmadillo
+Imports: Rcpp,
+         RcppArmadillo
+Depends: 
+     MASS,
+     grpreg,
+     gglasso,
+     survival,
+     glmnet,
+     ncvreg,
+     grplasso,
+     simsurv,
+     pracma,
+     RcppArmadillo
+Maintainer: The package maintainer <gilly.lavita@gmail.com>
+url: https://github.com/libedeutch/SPMA
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
+

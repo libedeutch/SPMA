@@ -4,7 +4,8 @@
 \description{
 Calculate penalty function of lasso and scad }
 \usage{
-penalty.factor.f(beta0 = NULL, lasso.lam = NULL, ncov, npieces, penalty.function, nopenalty.index = NULL)
+penalty.factor.f(beta0 = NULL, lasso.lam = NULL, ncov,
+npieces, penalty.function, nopenalty.index = NULL)
 }
 \arguments{
 \item{beta0}{initialized coefficients.}

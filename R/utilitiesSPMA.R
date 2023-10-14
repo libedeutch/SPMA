@@ -1,23 +1,13 @@
 # R package functions
+#if (!require(MASS)) install.packages('MASS')
 
-library(MASS)
-library(grpreg)
-library(gglasso)
-library(survival)
-library(glmnet)
-library(ncvreg)
-
-# Interval Censor package for Group lasso, group SCAD, and group MCP
-library(grplasso)
-library(simsurv)
-library(pracma)
 # --------------- Section One SPMA utilities ------------------
 
 # ADD print result
 # BETA_0 is from norm distribution now
 
 #Rcpp::sourceCpp("OneDrive - The University of Texas at Dallas/metadata analysis/code/spmaC.cpp")
-#Rcpp::sourceCpp("metaADMM/spmaC_ADMM.cpp")
+#Rcpp::sourceCpp("~/src/spmaC_ADMM.cpp")
 
 # generate one set of simulation data
 generate_data <- function(N = c(500,500,500),p = 4, correlate = FALSE, rightCensor = FALSE,intervalCensor = FALSE, M =3, q = 0.50,seed){
@@ -90,7 +80,7 @@ generate_data <- function(N = c(500,500,500),p = 4, correlate = FALSE, rightCens
     eventU <- runif(augN[2],0,1)
     event2 <- -log(eventU)/(exp(X2%*%beta_02))
     u = runif(1,2,3)
-    print(paste("u is ", u))
+    #print(paste("u is ", u))
     censor2 <- rexp(augN[2], exp(u*X2%*%beta_02))
     status2 <-  ifelse(censor2>event2,1,0)
     event2 = ifelse(censor2>event2,event2,censor2)
@@ -839,9 +829,9 @@ bic_non_spma <- function(set.n, thetahat, sample1, sample2, sample3, p, M = 3,in
 
 }
 
-bic_lasso <- function(ni, thetahat, saple, p){
+bic_lasso <- function(ni, thetahat, sample, p){
   # first coponent is still 500*1 by setting nrow =1, to transpose
-  p1 = t(as.atrix(saple[,p+2], nrow = 1,ncol = ni))%*%
+  p1 = t(as.matrix(sample[,p+2], nrow = 1,ncol = ni))%*%
     (as.matrix(sample[,1:p])%*%as.matrix(thetahat[1:p], ncol =1))
 
   sample = sample[order(sample[,p+1], decreasing = FALSE), ]
@@ -911,7 +901,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.lasso1 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[1],thetahat = thetahat.lasso1[,i],sample1,p, M = 3)
+      bb = bic_lasso(N[1],thetahat = thetahat.lasso1[,i],sample1,p)
       bic.lasso1[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.lasso1 = bic.lasso1[-1,]
@@ -923,7 +913,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.lasso2 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[2],thetahat = thetahat.lasso2[,i],sample2,p, M = 3)
+      bb = bic_lasso(N[2],thetahat = thetahat.lasso2[,i],sample2,p)
       bic.lasso2[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.lasso2 = bic.lasso2[-1,]
@@ -936,7 +926,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.lasso3 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[3],thetahat = thetahat.lasso3[,i],sample3,p, M = 3)
+      bb = bic_lasso(N[3],thetahat = thetahat.lasso3[,i],sample3,p)
       bic.lasso3[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.lasso3 = bic.lasso3[-1,]
@@ -948,7 +938,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.scad1 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[1],thetahat = thetahat.scad1[,i],sample1,p, M = 3)
+      bb = bic_lasso(N[1],thetahat = thetahat.scad1[,i],sample1,p)
       bic.scad1[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.scad1 = bic.scad1[-1,]
@@ -960,7 +950,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.scad2 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[2],thetahat = thetahat.scad2[,i],sample2,p, M = 3)
+      bb = bic_lasso(N[2],thetahat = thetahat.scad2[,i],sample2,p)
       bic.scad2[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.scad2 = bic.scad2[-1,]
@@ -972,7 +962,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.scad3 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[3],thetahat = thetahat.scad3[,i],sample3,p, M = 3)
+      bb = bic_lasso(N[3],thetahat = thetahat.scad3[,i],sample3,p)
       bic.scad3[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.scad3 = bic.scad3[-1,]
@@ -984,7 +974,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.mcp1 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[1],thetahat = thetahat.mcp1[,i],sample1,p, M = 3)
+      bb = bic_lasso(N[1],thetahat = thetahat.mcp1[,i],sample1,p)
       bic.mcp1[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.mcp1 = bic.mcp1[-1,]
@@ -996,7 +986,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.mcp2 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[2],thetahat = thetahat.mcp2[,i],sample2,p, M = 3)
+      bb = bic_lasso(N[2],thetahat = thetahat.mcp2[,i],sample2,p)
       bic.mcp2[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.mcp2 = bic.mcp2[-1,]
@@ -1008,7 +998,7 @@ bic_model_selection <- function(trainSPMA.object){
     bic.mcp3 = cbind(rep(0,num.col), rep(0,num.col))
 
     for(i in 1:num.col){
-      bb = bic_lasso(N[3],thetahat = thetahat.mcp3[,i],sample3,p, M = 3)
+      bb = bic_lasso(N[3],thetahat = thetahat.mcp3[,i],sample3,p)
       bic.mcp3[i,1:2] = c(bb$p1,bb$p2)
     }
     bic.mcp3 = bic.mcp3[-1,]
@@ -1862,17 +1852,30 @@ false_positive <- function(confuse){
 # mcp_regression_group_case2() for group mcp
 
 # Lambda_0n = sum_k=0^m Phi_k^*B_k(t,m,u,v)
+# Lambda_0n=function(t,phi,m,u,v){
+#   t=as.vector(t)
+#   res=rep(0,length(t))
+#   for (k in 0:m) {
+#     res[t!=Inf]=res[t!=Inf]+sum(exp(phi[1:(k+1)]))*bernsteinb(k=k,n = m,x = (t[t!=Inf]-v)/(u-v))
+#   }
+#   res[t==0]=0
+#   res[t==Inf]=Inf
+#   return(res)
+# }
 Lambda_0n=function(t,phi,m,u,v){
   t=as.vector(t)
+  idx = which(t!=Inf)
   res=rep(0,length(t))
   for (k in 0:m) {
-    res[t!=Inf]=res[t!=Inf]+sum(exp(phi[1:(k+1)]))*bernsteinb(k=k,n = m,x = (t[t!=Inf]-v)/(u-v))
-  }
-  res[t==0]=0
-  res[t==Inf]=Inf
+     for(o in idx){
+       #res[t!=Inf]=res[t!=Inf]+sum(exp(phi[1:(k+1)]))*bernsteinb(k=k,n = m,x = (t[t!=Inf]-v)/(u-v))
+       res[o] = res[o]+sum(exp(phi[1:(k+1)]))*bernsteinb(k=k,n=m,x=(t[o]-v)/(u-v))
+     }
+      }
+  res[t==0] <- 0
+  res[t==Inf] <- Inf
   return(res)
 }
-
 
 # general interval censored data
 l_n_case2=function(phi,data,beta,m,n){
@@ -2295,7 +2298,7 @@ oracle_regression_case2=function(initial_val,n,J,p,data,m,epsilon,maxiter){
 
 # ---------------- Section Three Wu & Cook utilities ---------------------
 
-EM_f <- function(indata, lam0, beta0, lasso.lam, ncov, npieces, cutpoints, penalty.function, penalty.factor = NULL, nopenalty.index = NULL, thresh = 1e-6, maxit = 200) {
+EM.f <- function(indata, lam0, beta0, lasso.lam, ncov, npieces, cutpoints, penalty.function, penalty.factor = NULL, nopenalty.index = NULL, thresh = 1e-6, maxit = 200) {
 
   cur.lam  <- lam0
   cur.beta <- beta0

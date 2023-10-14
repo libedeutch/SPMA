@@ -14,8 +14,8 @@ dist2beta0(beta0,betahat,p,M)
 \item{M}{the number of generated studies}
 }
 \examples{
-beta0 = c(1:30)
+beta0 = matrix(c(1:30),nrow = 3)
 betahat = rnorm(30,2,5)
-dist2beta(beta0,betahat,10,3)
+dist2beta0(beta0,betahat,10,3)
 }
 

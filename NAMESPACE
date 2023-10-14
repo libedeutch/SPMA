@@ -1,1 +1,7 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("stats", "coef", "integrate", "median", "optim", "rexp","rnorm", "runif", "sd")
+importFrom(Rcpp, evalCpp)
+useDynLib(SPMA)
+importFrom("survival","coxph","Surv")
+
+

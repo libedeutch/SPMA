@@ -3,7 +3,7 @@
     "path": "~/SPMA/man/dist2beta0.Rd",
     "project_path": "man/dist2beta0.Rd",
     "type": "r_doc",
-    "hash": "1610885147",
+    "hash": "3770876041",
     "contents": "",
     "dirty": false,
     "created": 1697141749571.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "18,29",
-        "scrollLine": "0"
+        "cursorPosition": "16,31",
+        "scrollLine": "2"
     },
     "folds": "",
-    "lastKnownWriteTime": 1697142055,
+    "lastKnownWriteTime": 1697262098,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697142055347,
+    "last_content_update": 1697262098101,
     "read_only": false,
     "read_only_alternatives": []
 }
