@@ -42,5 +42,5 @@ result = list()
 rmseO = rmse(trainSPMA.object=re2, best.idx = best.idx, spma.bic = spma.bic, Data = tt)
 result[[1]] = rmseO
 printResult(result, intervalCensor = FALSE)
-
+```
 More function descriptions and examples are provided in [folder `man`](https://github.com/libedeutch/SPMA/man)
