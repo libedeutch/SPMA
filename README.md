@@ -7,9 +7,11 @@ Perform meta-analysis with semiparametric regression models based on summary-lev
 data = generate_data(N = c(200,200,200), p= 10, seed = 2024,rightCensor = TRUE, correlate = TRUE, intervalCensor =FALSE
 # Model fitting
 re = trainSPMA(data,iter = 1000,rightCensor = TRUE, intervalCensor = FALSE,m = 5)
+
 # Model selection
 best.idx = bic_model_selection(re)
 spma.bic = select.model.spma(re)
+
 # Extract best estimates 
 unpel.beta = re$unpel
 lasso1.beta = re$lasso1$beta[,best.idx$idx.lasso1]
