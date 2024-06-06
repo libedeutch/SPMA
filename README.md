@@ -5,6 +5,7 @@ Perform meta-analysis with semiparametric regression models based on summary-lev
 ```R
 
 data = generate_data(N = c(200,200,200), p= 10, seed = 2024,rightCensor = TRUE, correlate = TRUE, intervalCensor =FALSE
+
 # Model fitting
 re = trainSPMA(data,iter = 1000,rightCensor = TRUE, intervalCensor = FALSE,m = 5)
 
