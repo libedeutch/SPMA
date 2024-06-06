@@ -821,8 +821,8 @@ bic_non_spma <- function(set.n, thetahat, sample1, sample2, sample3, p, M = 3,in
 
 
   p1 = (-2)*p1
-  #p2 = log(sum(set.n)) / sum(set.n) * log(sum(thetahat!=0) )
-  p2 = log(sum(set.n)) *(sum(thetahat!=0)) # ?
+  p2 = log(sum(set.n)) / sum(set.n) * log(sum(thetahat!=0) )
+  #p2 = log(sum(set.n)) *(sum(thetahat!=0)) # ?
   return (list(p1 = p1,p2=p2))
   #return(p1+p2)
 
