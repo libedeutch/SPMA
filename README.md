@@ -44,4 +44,4 @@ rmseO = rmse(trainSPMA.object=re2, best.idx = best.idx, spma.bic = spma.bic, Dat
 result[[1]] = rmseO
 printResult(result, intervalCensor = FALSE)
 ```
-More function descriptions and examples are provided in [`\man`](https://github.com/libedeutch/SPMA/tree/main/man)
+More function descriptions and examples are provided in [`man`](https://github.com/libedeutch/SPMA/tree/main/man)
