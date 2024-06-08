@@ -23,18 +23,17 @@ opt = parse_args(opt_parser)
 
 
 print(opt)
-source("~/metaADMM/utilities_test_rcSep12_add_yuxiang_cook.R")
-Rcpp::sourceCpp("~/metaADMM/spmaC_ADMM.cpp")
-#Rcpp::sourceCpp("/Users/gilly/Library/CloudStorage/OneDrive-TheUniversityofTexasatDallas/metadata analysis/code/spmaC.cpp")
+source("~/R/utilities.R")
+Rcpp::sourceCpp("~/src/spmaC_ADMM.cpp")
 seed.save = c()
 result = list()
 seed = sample(1:1000000, opt$rep)
 seed.save = c(seed.save, seed)
 #write.table(seed.save, paste0("metaADMM/One1/seed_",opt$n1,"_",opt$n2,"_",opt$n3,"_ic_",opt$ic,"_cor_",opt$correlate,"_p_",opt$p,"_seed",".txt"))
 seed = read.table(paste0("metaADMM/One1/seed_",opt$n1,"_",opt$n2,"_",opt$n3,"_ic_",opt$ic,"_cor_",opt$correlate,"_p_",opt$p,"_seed",".txt"))
-# OnebyOne5 is for testing q = 0.2, 10e-3, 10e-2, rho = lambda, alpha = 1.5
+
 # The performance is not good with 18 replicates
-# try ceil(p*q) to generate more nonzero coefficients
+
 #seed = as.vector(seed)
 for(i in opt$idx:opt$idxend){
  print(i)
